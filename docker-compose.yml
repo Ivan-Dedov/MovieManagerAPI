@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  web:
+    container_name: "MovieManagerAPI"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8090:80"
+    depends_on:
+      - "postgres"
+
+  postgres:
+    image: "postgres:latest"
+    container_name: postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=movies
+      - POSTGRES_USER=sean
+      - POSTGRES_DB=movie_database
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+volumes:
+  data-volume:

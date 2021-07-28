@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MovieManagerAPI</name>
+    </assembly>
+    <members>
+        <member name="T:MovieManagerAPI.Controllers.GenreController">
+            <summary>
+            Controller for CRUD actions involving genres.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Controllers.GenreController.GetGenreAsync(System.String)">
+            <summary>
+            Asynchronously retrieve the info about the provided genre if exists.
+            </summary>
+            <param name="genre">The name of the genre.</param>
+            <returns>The info about the genre, if it exists.</returns>
+        </member>
+        <member name="M:MovieManagerAPI.Controllers.GenreController.InsertGenreAsync(System.String)">
+            <summary>
+            Asynchronously inserts a new genre to the database.
+            </summary>
+            <param name="genre">The name of the genre to insert (must be unique - if not, returns error code 400).</param>
+        </member>
+        <member name="M:MovieManagerAPI.Controllers.GenreController.DeleteGenreAsync(System.String)">
+            <summary>
+            Asynchronously deletes a genre from the database.
+            </summary>
+            <param name="genre">The name of the genre to delete.</param>
+        </member>
+        <member name="T:MovieManagerAPI.Controllers.MasterController">
+            <summary>
+            The master controller to run any PostgreSQL query to the database.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Controllers.MasterController.RunQuery(System.String)">
+            <summary>
+            Asynchronously runs the provided query to the database.
+            </summary>
+            <param name="query">The query to run.</param>
+        </member>
+        <member name="T:MovieManagerAPI.Controllers.UserController">
+            <summary>
+            Controller for CRUD actions involving users.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Controllers.UserController.GetUsersAsync">
+            <summary>
+            Asynchronously retrieve all users from the database.
+            </summary>
+            <returns>An IEnumerable containing all registered users.</returns>
+        </member>
+        <member name="M:MovieManagerAPI.Controllers.UserController.InsertUserAsync(MovieManagerAPI.Entities.Person)">
+            <summary>
+            Asynchronously inserts a new user to the database.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Controllers.UserController.DeleteUserAsync(System.Int32)">
+            <summary>
+            Asynchronously deletes a user from the database.
+            </summary>
+            <param name="id">The ID of the user to delete.</param>
+        </member>
+        <member name="T:MovieManagerAPI.Entities.Director">
+            <summary>
+            Describes a single film director.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Director.firstName">
+            <summary>
+            The first name of the director.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Director.lastName">
+            <summary>
+            The last name of the director.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Director.dateOfBirth">
+            <summary>
+            The date of birth of the director.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Director.Id">
+            <summary>
+            The unique ID of the director.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Director.FirstName">
+            <summary>
+            The first name of the director. Throws ArgumentException if name is null, empty or fully whitespace.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Director.MiddleName">
+            <summary>
+            The middle name of the director. Optional.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Director.LastName">
+            <summary>
+            The last name of the director. Throws ArgumentException if name is null, empty or fully whitespace.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Director.DateOfBirth">
+            <summary>
+            The date of birth of the director.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Director.#ctor(System.Int32,System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Creates a new director with specified ID, first, middle and last names, and date of birth.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Director.#ctor(System.String,System.String,System.DateTime)">
+            <summary>
+            Creates a new director with specified first and last names, and date of birth.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Director.#ctor(System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Creates a new director with specified first, middle and last names, and date of birth.
+            </summary>
+        </member>
+        <member name="T:MovieManagerAPI.Entities.Genre">
+            <summary>
+            Describes a single film genre.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Genre.name">
+            <summary>
+            The unique name of the genre.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Genre.Id">
+            <summary>
+            The unique ID of the genre.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Genre.Name">
+            <summary>
+            The unique name of the genre. Throws ArgumentException if name is null, empty or fully whitespace.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Genre.#ctor(System.Int32,System.String)">
+            <summary>
+            Creates a new genre with specified ID and name.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Genre.#ctor(System.String)">
+            <summary>
+            Creates a new genre with a specified name.
+            </summary>
+        </member>
+        <member name="T:MovieManagerAPI.Entities.GenredMovie">
+            <summary>
+            Describes a single 'Genre-Movie' pair (i.e. an element of a many-to-many relationship between
+            genres and movies).
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.GenredMovie.MovieId">
+            <summary>
+            The ID of the movie that corresponds to the chosen genre.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.GenredMovie.GenreId">
+            <summary>
+            The ID of this movie's genre.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.GenredMovie.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new item of 'Genre-Movie' relationship.
+            </summary>
+        </member>
+        <member name="T:MovieManagerAPI.Entities.Movie">
+            <summary>
+            Describes a single film.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Movie.title">
+            <summary>
+            The title of the film.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Movie.rating">
+            <summary>
+            The rating of the film - an integer between 0 and 100 (inclusive).
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Movie.Id">
+            <summary>
+            The unique ID of the film.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Movie.Title">
+            <summary>
+            The title of the film. Throws ArgumentException if title is null, empty or fully whitespace.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Movie.Year">
+            <summary>
+            The release year of the film.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Movie.DirectorId">
+            <summary>
+            The ID of the director of the film (from the 'director' table).
+            Use the GetDirectorAsync() method to get the director.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Movie.Duration">
+            <summary>
+            The duration of the film.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Movie.Rating">
+            <summary>
+            The rating of the film - an integer between 0 and 100 (inclusive).
+            Throws ArgumentException if this condition is not satisfied.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.#ctor(System.Int32,System.String,System.Int32,System.TimeSpan,System.Int32,System.Int32)">
+            <summary>
+            Creates a new movie with the specified ID, title, release year, ID of the director (from the
+            'director' table), duration and rating.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.#ctor(System.String,System.Int32,System.TimeSpan)">
+            <summary>
+            Creates a new movie with the specified title, release year and duration.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.#ctor(System.String,System.Int32,System.Int32,System.TimeSpan)">
+            <summary>
+            Creates a new movie with the specified title, release year, duration and director ID (from
+            the 'director' table).
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.#ctor(System.String,System.Int32,System.TimeSpan,System.Int32)">
+            <summary>
+            Creates a new movie with the specified title, release year, duration and rating.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.#ctor(System.String,System.Int32,System.TimeSpan,System.Int32,System.Int32)">
+            <summary>
+            Creates a new movie with the specified title, release year, ID of the director (from the
+            'director' table), duration and rating.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.GetDirectorAsync">
+            <summary>
+            Asynchronously retrieves the director of this film.
+            </summary>
+            <returns>The director of this film.</returns>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.GetGenreAsync">
+            <summary>
+            Asynchronously retrieves the genre of this film.
+            </summary>
+            <returns>The genre of this film.</returns>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Movie.GetViewerListAsync">
+            <summary>
+            Asynchronously retrieves all people who have watched this film.
+            </summary>
+            <returns>An IEnumerable containing all people who have watched this film.</returns>
+        </member>
+        <member name="T:MovieManagerAPI.Entities.Person">
+            <summary>
+            Describes a single user.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Person.MinimumDateOfBirth">
+            <summary>
+            The minimum date of birth allowed for users.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Person.username">
+            <summary>
+            The unique username of the user.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Person.firstName">
+            <summary>
+            The first name of the user.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Person.lastName">
+            <summary>
+            The last name of the user.
+            </summary>
+        </member>
+        <member name="F:MovieManagerAPI.Entities.Person.dateOfBirth">
+            <summary>
+            The date of birth of the user.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Person.Id">
+            <summary>
+            The unique ID of the user.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Person.Email">
+            <summary>
+            The unique e-mail of the user.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Person.Username">
+            <summary>
+            The unique username name of the user. Throws ArgumentException if name is null, empty or fully whitespace.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Person.FirstName">
+            <summary>
+            The first name of the user. Throws ArgumentException if name is null, empty or fully whitespace.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Person.LastName">
+            <summary>
+            The last name of the user. Throws ArgumentException if name is null, empty or fully whitespace.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.Person.DateOfBirth">
+            <summary>
+            The date of birth of the user. Optional.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Person.#ctor(System.Int32,System.String,System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Creates a new user with the specified ID, email, username, first and last names, and date of birth.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Person.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new user with the specified email, username, first and last names.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Person.#ctor(System.String,System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Creates a new user with the specified email, username, first and last names and date of birth.
+            </summary>
+        </member>
+        <member name="M:MovieManagerAPI.Entities.Person.GetMoviesAsync">
+            <summary>
+            Asynchronously retrieves all movies watched by this user.
+            </summary>
+            <returns>An IEnumerable containing all movies watched by this user.</returns>
+        </member>
+        <member name="T:MovieManagerAPI.Entities.View">
+            <summary>
+            Describes a single view, which is a 'Movie-Person' pair (i.e. an element of a many-to-many relationship).
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.View.PersonId">
+            <summary>
+            The unique ID of the person who watched this movie.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.View.MovieId">
+            <summary>
+            The unique ID of the movie which this person has watched.
+            </summary>
+        </member>
+        <member name="P:MovieManagerAPI.Entities.View.Rating">
+            <summary>
+            User's rating of this movie.
+            </summary>
+        </member>
+    </members>
+</doc>
